@@ -112,6 +112,48 @@
             transform: translateY(-5px);
             border-color: rgba(99, 102, 241, 0.5);
         }
+
+        /* Form Loading State */
+        .form-loading {
+            opacity: 0.7;
+            pointer-events: none;
+        }
+        
+        .spinner {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255,255,255,.3);
+            border-radius: 50%;
+            border-top-color: #fff;
+            animation: spin 1s ease-in-out infinite;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Success/Error Messages */
+        .form-message {
+            padding: 1rem;
+            border-radius: 0.75rem;
+            margin-bottom: 1rem;
+            display: none;
+        }
+        
+        .form-message.success {
+            background: rgba(34, 197, 94, 0.2);
+            border: 1px solid rgba(34, 197, 94, 0.5);
+            color: #4ade80;
+            display: block;
+        }
+        
+        .form-message.error {
+            background: rgba(239, 68, 68, 0.2);
+            border: 1px solid rgba(239, 68, 68, 0.5);
+            color: #f87171;
+            display: block;
+        }
     </style>
 </head>
 <body class="bg-slate-950 text-white overflow-x-hidden">
@@ -538,35 +580,54 @@
             </p>
             
             <div class="glass rounded-3xl p-8 md:p-12 border border-white/10 max-w-2xl mx-auto">
-                <form class="space-y-6 text-left" onsubmit="event.preventDefault(); alert('¡Gracias por tu interés! Te contactaré pronto.');">
+                <!-- Formspree Form -->
+                <form id="contact-form" class="space-y-6 text-left" action="https://formspree.io/f/xwvrlbbl" method="POST">
+                    <!-- Success/Error Messages -->
+                    <div id="form-success" class="form-message success">
+                        <div class="flex items-center gap-2">
+                            <i data-lucide="check-circle" class="w-5 h-5"></i>
+                            <span>¡Mensaje enviado con éxito! Te contactaré pronto.</span>
+                        </div>
+                    </div>
+                    <div id="form-error" class="form-message error">
+                        <div class="flex items-center gap-2">
+                            <i data-lucide="alert-circle" class="w-5 h-5"></i>
+                            <span>Hubo un error al enviar el mensaje. Por favor, intenta de nuevo.</span>
+                        </div>
+                    </div>
+
+                    <!-- Honeypot field for spam protection -->
+                    <input type="text" name="_gotcha" style="display:none" />
+
                     <div class="grid md:grid-cols-2 gap-6">
                         <div>
-                            <label class="block text-sm font-medium text-slate-300 mb-2">Nombre</label>
-                            <input type="text" class="w-full px-4 py-3 rounded-xl bg-slate-800/50 border border-white/10 focus:border-indigo-500 focus:outline-none transition-colors text-white" placeholder="Tu nombre">
+                            <label for="name" class="block text-sm font-medium text-slate-300 mb-2">Nombre</label>
+                            <input type="text" id="name" name="name" required class="w-full px-4 py-3 rounded-xl bg-slate-800/50 border border-white/10 focus:border-indigo-500 focus:outline-none transition-colors text-white placeholder-slate-500" placeholder="Tu nombre">
                         </div>
                         <div>
-                            <label class="block text-sm font-medium text-slate-300 mb-2">Email</label>
-                            <input type="email" class="w-full px-4 py-3 rounded-xl bg-slate-800/50 border border-white/10 focus:border-indigo-500 focus:outline-none transition-colors text-white" placeholder="tu@email.com">
+                            <label for="email" class="block text-sm font-medium text-slate-300 mb-2">Email</label>
+                            <input type="email" id="email" name="email" required class="w-full px-4 py-3 rounded-xl bg-slate-800/50 border border-white/10 focus:border-indigo-500 focus:outline-none transition-colors text-white placeholder-slate-500" placeholder="tu@email.com">
                         </div>
                     </div>
                     
                     <div>
-                        <label class="block text-sm font-medium text-slate-300 mb-2">Servicio de interés</label>
-                        <select class="w-full px-4 py-3 rounded-xl bg-slate-800/50 border border-white/10 focus:border-indigo-500 focus:outline-none transition-colors text-white">
-                            <option>Trading Algorítmico (MT4/MT5/Python)</option>
-                            <option>Automatización de Negocios (N8N/Make)</option>
-                            <option>Video con Avatares IA (HeyGen)</option>
-                            <option>Combinación de servicios</option>
+                        <label for="service" class="block text-sm font-medium text-slate-300 mb-2">Servicio de interés</label>
+                        <select id="service" name="service" required class="w-full px-4 py-3 rounded-xl bg-slate-800/50 border border-white/10 focus:border-indigo-500 focus:outline-none transition-colors text-white">
+                            <option value="Trading Algorítmico">Trading Algorítmico (MT4/MT5/Python)</option>
+                            <option value="Automatización de Negocios">Automatización de Negocios (N8N/Make)</option>
+                            <option value="Video con Avatares IA">Video con Avatares IA (HeyGen)</option>
+                            <option value="Combinación de servicios">Combinación de servicios</option>
                         </select>
                     </div>
                     
                     <div>
-                        <label class="block text-sm font-medium text-slate-300 mb-2">Mensaje</label>
-                        <textarea rows="4" class="w-full px-4 py-3 rounded-xl bg-slate-800/50 border border-white/10 focus:border-indigo-500 focus:outline-none transition-colors text-white resize-none" placeholder="Cuéntame sobre tu proyecto..."></textarea>
+                        <label for="message" class="block text-sm font-medium text-slate-300 mb-2">Mensaje</label>
+                        <textarea id="message" name="message" rows="4" required class="w-full px-4 py-3 rounded-xl bg-slate-800/50 border border-white/10 focus:border-indigo-500 focus:outline-none transition-colors text-white placeholder-slate-500 resize-none" placeholder="Cuéntame sobre tu proyecto..."></textarea>
                     </div>
                     
-                    <button type="submit" class="w-full py-4 bg-gradient-to-r from-indigo-600 to-purple-600 rounded-xl font-bold text-lg hover:scale-[1.02] transition-transform glow-hover">
-                        Enviar Mensaje
+                    <button type="submit" id="submit-btn" class="w-full py-4 bg-gradient-to-r from-indigo-600 to-purple-600 rounded-xl font-bold text-lg hover:scale-[1.02] transition-transform glow-hover flex items-center justify-center gap-2">
+                        <span id="btn-text">Enviar Mensaje</span>
+                        <span id="btn-spinner" class="spinner hidden"></span>
                     </button>
                 </form>
                 
@@ -679,6 +740,65 @@
                     });
                 }
             });
+        });
+
+        // Formspree AJAX Form Handling
+        document.getElementById('contact-form').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const form = this;
+            const submitBtn = document.getElementById('submit-btn');
+            const btnText = document.getElementById('btn-text');
+            const btnSpinner = document.getElementById('btn-spinner');
+            const successMsg = document.getElementById('form-success');
+            const errorMsg = document.getElementById('form-error');
+            
+            // Hide previous messages
+            successMsg.classList.remove('success');
+            successMsg.style.display = 'none';
+            errorMsg.classList.remove('error');
+            errorMsg.style.display = 'none';
+            
+            // Loading state
+            form.classList.add('form-loading');
+            btnText.textContent = 'Enviando...';
+            btnSpinner.classList.remove('hidden');
+            submitBtn.disabled = true;
+            
+            try {
+                const response = await fetch(form.action, {
+                    method: 'POST',
+                    body: new FormData(form),
+                    headers: {
+                        'Accept': 'application/json'
+                    }
+                });
+                
+                if (response.ok) {
+                    // Success
+                    successMsg.style.display = 'block';
+                    successMsg.classList.add('success');
+                    form.reset();
+                    
+                    // Scroll to top of form
+                    form.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                } else {
+                    throw new Error('Form submission failed');
+                }
+            } catch (error) {
+                // Error
+                errorMsg.style.display = 'block';
+                errorMsg.classList.add('error');
+            } finally {
+                // Reset button state
+                form.classList.remove('form-loading');
+                btnText.textContent = 'Enviar Mensaje';
+                btnSpinner.classList.add('hidden');
+                submitBtn.disabled = false;
+                
+                // Re-initialize icons for new content
+                lucide.createIcons();
+            }
         });
     </script>
 </body>
