@@ -3,91 +3,72 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Security Meta Tags -->
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta http-equiv="X-Frame-Options" content="DENY">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <meta http-equiv="Content-Security-Policy" content="
+        default-src 'self';
+        script-src 'self' https://cdn.tailwindcss.com https://unpkg.com;
+        style-src 'self' https://fonts.googleapis.com 'unsafe-inline';
+        font-src https://fonts.gstatic.com;
+        connect-src https://formspree.io https://*.formspree.io;
+        img-src 'self' data: https:;
+    ">
+    
     <title>Germán Sánchez Lobo | Automatización Inteligente</title>
+    
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/lucide@latest"></script>
+    
     <style>
-        * {
-            font-family: 'Outfit', sans-serif;
-        }
-        .font-display {
-            font-family: 'Space Grotesk', sans-serif;
-        }
+        * { font-family: 'Outfit', sans-serif; }
+        .font-display { font-family: 'Space Grotesk', sans-serif; }
         
-        /* Gradient Animation */
         @keyframes gradient {
             0% { background-position: 0% 50%; }
             50% { background-position: 100% 50%; }
             100% { background-position: 0% 50%; }
         }
-        
         .animate-gradient {
             background-size: 200% 200%;
             animation: gradient 8s ease infinite;
         }
-        
-        /* Float Animation */
         @keyframes float {
             0%, 100% { transform: translateY(0px); }
             50% { transform: translateY(-20px); }
         }
-        
-        .animate-float {
-            animation: float 6s ease-in-out infinite;
-        }
-        
+        .animate-float { animation: float 6s ease-in-out infinite; }
         .animate-float-delayed {
             animation: float 6s ease-in-out infinite;
             animation-delay: 2s;
         }
-        
-        /* Glow Effect */
-        .glow {
-            box-shadow: 0 0 40px rgba(99, 102, 241, 0.3);
-        }
-        
-        .glow-hover:hover {
-            box-shadow: 0 0 60px rgba(99, 102, 241, 0.5);
-        }
-        
-        /* Glassmorphism */
+        .glow { box-shadow: 0 0 40px rgba(99, 102, 241, 0.3); }
+        .glow-hover:hover { box-shadow: 0 0 60px rgba(99, 102, 241, 0.5); }
         .glass {
             background: rgba(255, 255, 255, 0.03);
             backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.1);
         }
-        
-        /* Text Gradient */
         .text-gradient {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
-        
         .text-gradient-gold {
             background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
-        
-        /* Custom Scrollbar */
-        ::-webkit-scrollbar {
-            width: 10px;
-        }
-        ::-webkit-scrollbar-track {
-            background: #0f172a;
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #4f46e5;
-            border-radius: 5px;
-        }
-        
-        /* Reveal Animation */
+        ::-webkit-scrollbar { width: 10px; }
+        ::-webkit-scrollbar-track { background: #0f172a; }
+        ::-webkit-scrollbar-thumb { background: #4f46e5; border-radius: 5px; }
         .reveal {
             opacity: 0;
             transform: translateY(30px);
@@ -97,28 +78,19 @@
             opacity: 1;
             transform: translateY(0);
         }
-        
-        /* Grid Pattern */
         .bg-grid {
             background-image: radial-gradient(circle at 1px 1px, rgba(255,255,255,0.05) 1px, transparent 0);
             background-size: 40px 40px;
         }
-
-        /* Platform Cards Hover */
-        .platform-card {
-            transition: all 0.3s ease;
-        }
+        .platform-card { transition: all 0.3s ease; }
         .platform-card:hover {
             transform: translateY(-5px);
             border-color: rgba(99, 102, 241, 0.5);
         }
-
-        /* Form Loading State */
         .form-loading {
             opacity: 0.7;
             pointer-events: none;
         }
-        
         .spinner {
             display: inline-block;
             width: 20px;
@@ -128,26 +100,19 @@
             border-top-color: #fff;
             animation: spin 1s ease-in-out infinite;
         }
-        
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
-
-        /* Success/Error Messages */
+        @keyframes spin { to { transform: rotate(360deg); } }
         .form-message {
             padding: 1rem;
             border-radius: 0.75rem;
             margin-bottom: 1rem;
             display: none;
         }
-        
         .form-message.success {
             background: rgba(34, 197, 94, 0.2);
             border: 1px solid rgba(34, 197, 94, 0.5);
             color: #4ade80;
             display: block;
         }
-        
         .form-message.error {
             background: rgba(239, 68, 68, 0.2);
             border: 1px solid rgba(239, 68, 68, 0.5);
@@ -168,21 +133,17 @@
                     </div>
                     <span class="font-display font-bold text-xl tracking-tight">German Sanchez Lobo <span class="text-indigo-400">Automatizaciones</span></span>
                 </div>
-                
                 <div class="hidden md:flex space-x-8">
                     <a href="#servicios" class="text-slate-300 hover:text-white transition-colors text-sm font-medium">Servicios</a>
                     <a href="#beneficios" class="text-slate-300 hover:text-white transition-colors text-sm font-medium">Beneficios</a>
                     <a href="#proceso" class="text-slate-300 hover:text-white transition-colors text-sm font-medium">Proceso</a>
                     <a href="#contacto" class="px-6 py-2 bg-indigo-600 hover:bg-indigo-700 rounded-full text-sm font-medium transition-all glow-hover">Contactar</a>
                 </div>
-                
                 <button class="md:hidden text-white" onclick="document.getElementById('mobile-menu').classList.toggle('hidden')">
                     <i data-lucide="menu" class="w-6 h-6"></i>
                 </button>
             </div>
         </div>
-        
-        <!-- Mobile Menu -->
         <div id="mobile-menu" class="hidden md:hidden glass border-t border-white/10">
             <div class="px-4 pt-2 pb-6 space-y-2">
                 <a href="#servicios" class="block px-3 py-2 text-slate-300 hover:text-white">Servicios</a>
@@ -195,27 +156,22 @@
 
     <!-- Hero Section -->
     <section class="relative min-h-screen flex items-center justify-center overflow-hidden bg-grid">
-        <!-- Background Elements -->
         <div class="absolute inset-0 bg-gradient-to-b from-slate-950 via-slate-900/50 to-slate-950"></div>
         <div class="absolute top-0 left-1/4 w-96 h-96 bg-indigo-600/20 rounded-full blur-3xl animate-float"></div>
         <div class="absolute bottom-0 right-1/4 w-96 h-96 bg-purple-600/20 rounded-full blur-3xl animate-float-delayed"></div>
-        
         <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <div class="inline-flex items-center px-4 py-2 rounded-full glass mb-8 reveal">
                 <span class="flex h-2 w-2 rounded-full bg-green-400 mr-2 animate-pulse"></span>
                 <span class="text-sm text-slate-300">Disponible para nuevos proyectos</span>
             </div>
-            
             <h1 class="font-display text-5xl md:text-7xl lg:text-8xl font-bold mb-6 leading-tight reveal">
                 Automatiza tu <br>
                 <span class="text-gradient">Ventaja Competitiva</span>
             </h1>
-            
             <p class="text-xl md:text-2xl text-slate-400 max-w-3xl mx-auto mb-12 leading-relaxed reveal">
                 Transformo procesos manuales en <span class="text-white font-semibold">sistemas inteligentes</span>. 
                 Desde trading algorítmico hasta flujos de trabajo autónomos y contenido viral automatizado.
             </p>
-            
             <div class="flex flex-col sm:flex-row gap-4 justify-center items-center reveal">
                 <a href="#contacto" class="px-8 py-4 bg-gradient-to-r from-indigo-600 to-purple-600 rounded-full font-semibold text-lg hover:scale-105 transition-transform glow-hover flex items-center gap-2">
                     Iniciar Proyecto
@@ -226,8 +182,6 @@
                     <i data-lucide="chevron-down" class="w-5 h-5"></i>
                 </a>
             </div>
-            
-            <!-- Stats -->
             <div class="mt-20 grid grid-cols-2 md:grid-cols-4 gap-8 max-w-4xl mx-auto reveal">
                 <div class="glass rounded-2xl p-6">
                     <div class="text-3xl font-bold text-indigo-400 font-display">3+</div>
@@ -260,9 +214,7 @@
                     Tres pilares especializados para escalar tu operación sin límites humanos
                 </p>
             </div>
-
             <div class="grid md:grid-cols-3 gap-8">
-                <!-- Service 1: Trading -->
                 <div class="group relative reveal">
                     <div class="absolute inset-0 bg-gradient-to-r from-blue-600/20 to-cyan-600/20 rounded-3xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                     <div class="relative glass rounded-3xl p-8 h-full border border-white/10 hover:border-blue-500/50 transition-all duration-300 hover:transform hover:-translate-y-2">
@@ -297,8 +249,6 @@
                         </div>
                     </div>
                 </div>
-
-                <!-- Service 2: N8N/Make -->
                 <div class="group relative reveal">
                     <div class="absolute inset-0 bg-gradient-to-r from-purple-600/20 to-pink-600/20 rounded-3xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                     <div class="relative glass rounded-3xl p-8 h-full border border-white/10 hover:border-purple-500/50 transition-all duration-300 hover:transform hover:-translate-y-2">
@@ -332,8 +282,6 @@
                         </div>
                     </div>
                 </div>
-
-                <!-- Service 3: HeyGen -->
                 <div class="group relative reveal">
                     <div class="absolute inset-0 bg-gradient-to-r from-orange-600/20 to-red-600/20 rounded-3xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                     <div class="relative glass rounded-3xl p-8 h-full border border-white/10 hover:border-orange-500/50 transition-all duration-300 hover:transform hover:-translate-y-2">
@@ -379,7 +327,6 @@
                     <h2 class="font-display text-4xl md:text-5xl font-bold mb-8">
                         Por qué la <span class="text-gradient-gold">automatización</span> cambia las reglas del juego
                     </h2>
-                    
                     <div class="space-y-8">
                         <div class="flex gap-4">
                             <div class="w-12 h-12 rounded-full bg-indigo-500/20 flex items-center justify-center flex-shrink-0">
@@ -390,7 +337,6 @@
                                 <p class="text-slate-400">Operaciones en milisegundos, 24/7 sin fatiga ni errores emocionales. Tu estrategia ejecutada con precisión matemática.</p>
                             </div>
                         </div>
-                        
                         <div class="flex gap-4">
                             <div class="w-12 h-12 rounded-full bg-purple-500/20 flex items-center justify-center flex-shrink-0">
                                 <i data-lucide="scale" class="w-6 h-6 text-purple-400"></i>
@@ -400,7 +346,6 @@
                                 <p class="text-slate-400">Una vez configurado, tu sistema maneja 10 o 10,000 operaciones con el mismo esfuerzo. Crece sin contratar más personal.</p>
                             </div>
                         </div>
-                        
                         <div class="flex gap-4">
                             <div class="w-12 h-12 rounded-full bg-pink-500/20 flex items-center justify-center flex-shrink-0">
                                 <i data-lucide="shield-check" class="w-6 h-6 text-pink-400"></i>
@@ -410,7 +355,6 @@
                                 <p class="text-slate-400">Elimina el factor humano: sin distracciones, sin emociones, sin olvidos. Cada acción sigue el protocolo perfectamente.</p>
                             </div>
                         </div>
-                        
                         <div class="flex gap-4">
                             <div class="w-12 h-12 rounded-full bg-cyan-500/20 flex items-center justify-center flex-shrink-0">
                                 <i data-lucide="clock" class="w-6 h-6 text-cyan-400"></i>
@@ -422,7 +366,6 @@
                         </div>
                     </div>
                 </div>
-                
                 <div class="relative reveal">
                     <div class="absolute inset-0 bg-gradient-to-r from-indigo-500 to-purple-500 rounded-3xl blur-2xl opacity-20"></div>
                     <div class="relative glass rounded-3xl p-8 border border-white/10">
@@ -448,7 +391,6 @@
                                 <div class="text-xs text-slate-400">Costos operativos</div>
                             </div>
                         </div>
-                        
                         <div class="mt-6 p-4 rounded-xl bg-gradient-to-r from-indigo-600/20 to-purple-600/20 border border-indigo-500/30">
                             <div class="flex items-center gap-3">
                                 <div class="w-10 h-10 rounded-full bg-indigo-500 flex items-center justify-center">
@@ -475,7 +417,6 @@
                 </h2>
                 <p class="text-slate-400 text-lg">Metodología probada para entregar resultados tangibles</p>
             </div>
-
             <div class="grid md:grid-cols-4 gap-8">
                 <div class="relative reveal">
                     <div class="glass rounded-2xl p-6 border border-white/10 relative z-10 h-full">
@@ -485,7 +426,6 @@
                     </div>
                     <div class="hidden md:block absolute top-1/2 -right-4 w-8 h-0.5 bg-gradient-to-r from-indigo-500 to-transparent"></div>
                 </div>
-
                 <div class="relative reveal">
                     <div class="glass rounded-2xl p-6 border border-white/10 relative z-10 h-full">
                         <div class="w-12 h-12 bg-purple-600 rounded-xl flex items-center justify-center mb-4 font-bold text-xl">2</div>
@@ -494,7 +434,6 @@
                     </div>
                     <div class="hidden md:block absolute top-1/2 -right-4 w-8 h-0.5 bg-gradient-to-r from-purple-500 to-transparent"></div>
                 </div>
-
                 <div class="relative reveal">
                     <div class="glass rounded-2xl p-6 border border-white/10 relative z-10 h-full">
                         <div class="w-12 h-12 bg-pink-600 rounded-xl flex items-center justify-center mb-4 font-bold text-xl">3</div>
@@ -503,7 +442,6 @@
                     </div>
                     <div class="hidden md:block absolute top-1/2 -right-4 w-8 h-0.5 bg-gradient-to-r from-pink-500 to-transparent"></div>
                 </div>
-
                 <div class="relative reveal">
                     <div class="glass rounded-2xl p-6 border border-white/10 relative z-10 h-full">
                         <div class="w-12 h-12 bg-orange-600 rounded-xl flex items-center justify-center mb-4 font-bold text-xl">4</div>
@@ -515,7 +453,7 @@
         </div>
     </section>
 
-    <!-- Platforms Section - NUEVA SECCIÓN -->
+    <!-- Platforms Section -->
     <section class="py-20 relative bg-gradient-to-b from-slate-900/30 to-slate-950">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-12 reveal">
@@ -526,9 +464,7 @@
                     Contrata mis servicios directamente a través de estas plataformas con protección de pagos y reviews verificadas
                 </p>
             </div>
-
             <div class="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
-                <!-- Fiverr Card -->
                 <a href="https://www.fiverr.com/s/qD1a8dd" target="_blank" rel="noopener noreferrer" class="platform-card glass rounded-2xl p-6 border border-white/10 flex items-center gap-4 group reveal">
                     <div class="w-14 h-14 bg-green-500/20 rounded-xl flex items-center justify-center flex-shrink-0 group-hover:bg-green-500/30 transition-colors">
                         <svg class="w-8 h-8 text-green-400" viewBox="0 0 24 24" fill="currentColor">
@@ -541,8 +477,6 @@
                     </div>
                     <i data-lucide="external-link" class="w-5 h-5 text-slate-500 group-hover:text-white transition-colors"></i>
                 </a>
-
-                <!-- Upwork Card -->
                 <a href="https://www.upwork.com/freelancers/~01fee33a8e49295e36" target="_blank" rel="noopener noreferrer" class="platform-card glass rounded-2xl p-6 border border-white/10 flex items-center gap-4 group reveal">
                     <div class="w-14 h-14 bg-green-600/20 rounded-xl flex items-center justify-center flex-shrink-0 group-hover:bg-green-600/30 transition-colors">
                         <svg class="w-8 h-8 text-green-500" viewBox="0 0 24 24" fill="currentColor">
@@ -556,7 +490,6 @@
                     <i data-lucide="external-link" class="w-5 h-5 text-slate-500 group-hover:text-white transition-colors"></i>
                 </a>
             </div>
-
             <div class="mt-8 text-center reveal">
                 <p class="text-sm text-slate-500">
                     <i data-lucide="shield-check" class="w-4 h-4 inline mr-1"></i>
@@ -570,7 +503,6 @@
     <section id="contacto" class="py-32 relative overflow-hidden">
         <div class="absolute inset-0 bg-gradient-to-b from-indigo-900/20 to-slate-950"></div>
         <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-indigo-600/20 rounded-full blur-3xl"></div>
-        
         <div class="relative z-10 max-w-4xl mx-auto px-4 text-center reveal">
             <h2 class="font-display text-4xl md:text-6xl font-bold mb-6">
                 ¿Listo para <span class="text-gradient">automatizar</span>?
@@ -578,11 +510,8 @@
             <p class="text-xl text-slate-400 mb-12">
                 Transforma tu operación hoy. Cada día que esperas es una oportunidad perdida.
             </p>
-            
             <div class="glass rounded-3xl p-8 md:p-12 border border-white/10 max-w-2xl mx-auto">
-                <!-- Formspree Form -->
                 <form id="contact-form" class="space-y-6 text-left" action="https://formspree.io/f/xwvrlbbl" method="POST">
-                    <!-- Success/Error Messages -->
                     <div id="form-success" class="form-message success">
                         <div class="flex items-center gap-2">
                             <i data-lucide="check-circle" class="w-5 h-5"></i>
@@ -595,10 +524,7 @@
                             <span>Hubo un error al enviar el mensaje. Por favor, intenta de nuevo.</span>
                         </div>
                     </div>
-
-                    <!-- Honeypot field for spam protection -->
                     <input type="text" name="_gotcha" style="display:none" />
-
                     <div class="grid md:grid-cols-2 gap-6">
                         <div>
                             <label for="name" class="block text-sm font-medium text-slate-300 mb-2">Nombre</label>
@@ -609,7 +535,6 @@
                             <input type="email" id="email" name="email" required class="w-full px-4 py-3 rounded-xl bg-slate-800/50 border border-white/10 focus:border-indigo-500 focus:outline-none transition-colors text-white placeholder-slate-500" placeholder="tu@email.com">
                         </div>
                     </div>
-                    
                     <div>
                         <label for="service" class="block text-sm font-medium text-slate-300 mb-2">Servicio de interés</label>
                         <select id="service" name="service" required class="w-full px-4 py-3 rounded-xl bg-slate-800/50 border border-white/10 focus:border-indigo-500 focus:outline-none transition-colors text-white">
@@ -619,22 +544,19 @@
                             <option value="Combinación de servicios">Combinación de servicios</option>
                         </select>
                     </div>
-                    
                     <div>
                         <label for="message" class="block text-sm font-medium text-slate-300 mb-2">Mensaje</label>
                         <textarea id="message" name="message" rows="4" required class="w-full px-4 py-3 rounded-xl bg-slate-800/50 border border-white/10 focus:border-indigo-500 focus:outline-none transition-colors text-white placeholder-slate-500 resize-none" placeholder="Cuéntame sobre tu proyecto..."></textarea>
                     </div>
-                    
                     <button type="submit" id="submit-btn" class="w-full py-4 bg-gradient-to-r from-indigo-600 to-purple-600 rounded-xl font-bold text-lg hover:scale-[1.02] transition-transform glow-hover flex items-center justify-center gap-2">
                         <span id="btn-text">Enviar Mensaje</span>
                         <span id="btn-spinner" class="spinner hidden"></span>
                     </button>
                 </form>
-                
                 <div class="mt-8 pt-8 border-t border-white/10 flex flex-col md:flex-row justify-center items-center gap-6 text-slate-400">
-                    <a href="mailto:germansanchezlobo@gmail.com" class="flex items-center gap-2 hover:text-white transition-colors">
+                    <a href="#" id="email-link" class="flex items-center gap-2 hover:text-white transition-colors">
                         <i data-lucide="mail" class="w-5 h-5"></i>
-                        germansanchezlobo@gmail.com
+                        <span id="email-text">Cargando...</span>
                     </a>
                     <span class="hidden md:block">•</span>
                     <div class="flex gap-4">
@@ -667,7 +589,6 @@
                     </div>
                     <span class="font-display font-bold text-lg">German Sanchez Lobo <span class="text-indigo-400">Automatizaciones</span></span>
                 </div>
-                
                 <div class="flex gap-6">
                     <a href="https://www.fiverr.com/s/qD1a8dd" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 text-slate-400 hover:text-green-400 transition-colors text-sm">
                         <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
@@ -683,12 +604,10 @@
                     </a>
                 </div>
             </div>
-            
             <div class="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
                 <p class="text-slate-500 text-sm">
                     © 2024 Germán Sánchez Lobo. Todos los derechos reservados.
                 </p>
-                
                 <div class="flex gap-6 text-sm text-slate-400">
                     <a href="#" class="hover:text-white transition-colors">Privacidad</a>
                     <a href="#" class="hover:text-white transition-colors">Términos</a>
@@ -701,13 +620,19 @@
         // Initialize Lucide icons
         lucide.createIcons();
         
+        // Email obfuscation
+        const user = 'germansanchezlobo';
+        const domain = 'gmail.com';
+        const email = user + '@' + domain;
+        document.getElementById('email-link').href = 'mailto:' + email;
+        document.getElementById('email-text').textContent = email;
+        
         // Scroll Reveal Animation
         const observerOptions = {
             root: null,
             rootMargin: '0px',
             threshold: 0.1
         };
-
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -715,7 +640,6 @@
                 }
             });
         }, observerOptions);
-
         document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
 
         // Navbar scroll effect
@@ -742,9 +666,18 @@
             });
         });
 
-        // Formspree AJAX Form Handling
+        // Formspree AJAX Form Handling with rate limiting
+        let lastSubmit = 0;
         document.getElementById('contact-form').addEventListener('submit', async function(e) {
             e.preventDefault();
+            
+            // Rate limiting (30 seconds)
+            const now = Date.now();
+            if (now - lastSubmit < 30000) {
+                alert('Por favor espera 30 segundos entre mensajes.');
+                return;
+            }
+            lastSubmit = now;
             
             const form = this;
             const submitBtn = document.getElementById('submit-btn');
@@ -753,13 +686,9 @@
             const successMsg = document.getElementById('form-success');
             const errorMsg = document.getElementById('form-error');
             
-            // Hide previous messages
-            successMsg.classList.remove('success');
             successMsg.style.display = 'none';
-            errorMsg.classList.remove('error');
             errorMsg.style.display = 'none';
             
-            // Loading state
             form.classList.add('form-loading');
             btnText.textContent = 'Enviando...';
             btnSpinner.classList.remove('hidden');
@@ -775,28 +704,21 @@
                 });
                 
                 if (response.ok) {
-                    // Success
                     successMsg.style.display = 'block';
                     successMsg.classList.add('success');
                     form.reset();
-                    
-                    // Scroll to top of form
                     form.scrollIntoView({ behavior: 'smooth', block: 'start' });
                 } else {
                     throw new Error('Form submission failed');
                 }
             } catch (error) {
-                // Error
                 errorMsg.style.display = 'block';
                 errorMsg.classList.add('error');
             } finally {
-                // Reset button state
                 form.classList.remove('form-loading');
                 btnText.textContent = 'Enviar Mensaje';
                 btnSpinner.classList.add('hidden');
                 submitBtn.disabled = false;
-                
-                // Re-initialize icons for new content
                 lucide.createIcons();
             }
         });
