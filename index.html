@@ -12,12 +12,21 @@
     <!-- CSP Permisiva para GitHub Pages - CORREGIDO -->
     <meta http-equiv="Content-Security-Policy" content="
         default-src 'self' https:;
-        script-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com https://unpkg.com;
+        script-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com https://unpkg.com https://www.googletagmanager.com;
         style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.tailwindcss.com;
         font-src 'self' https://fonts.gstatic.com;
-        connect-src https://formspree.io https://*.formspree.io;
+        connect-src https://formspree.io https://*.formspree.io https://www.google-analytics.com;
         img-src 'self' data: https:;
     ">
+    
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XLQDZ581PP"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-XLQDZ581PP');
+    </script>
     
     <title>Germán Sánchez Lobo | Automatización Inteligente</title>
     
