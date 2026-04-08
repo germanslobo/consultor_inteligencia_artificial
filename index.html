@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Germán Sánchez Lobo | Automation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background: #0f172a;
+            color: white;
+        }
+        .container {
+            text-align: center;
+            background: rgba(255,255,255,0.1);
+            padding: 2rem;
+            border-radius: 1rem;
+        }
+        a {
+            color: #818cf8;
+            margin: 0 1rem;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Select Language / Seleccionar Idioma</h2>
+        <p>
+            <a href="index-es.html">🇪🇸 Español</a> | 
+            <a href="index-en.html">🇺🇸 English</a>
+        </p>
+        <p style="font-size: 0.8rem; margin-top: 2rem;">Redirecting... <span id="redirect-msg">English</span></p>
+    </div>
+    <script>
+        // Auto-redirigir según idioma del navegador
+        const userLang = navigator.language || navigator.userLanguage;
+        if (userLang.startsWith('es')) {
+            document.getElementById('redirect-msg').textContent = 'Español';
+            setTimeout(() => { window.location.href = 'index-es.html'; }, 1500);
+        } else {
+            document.getElementById('redirect-msg').textContent = 'English';
+            setTimeout(() => { window.location.href = 'index-en.html'; }, 1500);
+        }
+    </script>
+</body>
+</html>
